@@ -9,17 +9,32 @@
 
   <name>cjconverter</name>
   <url>http://maven.apache.org</url>
-
+	
+  <!--DEVELOPPERS-->
+  <developers>
+    <developer>
+      <id>Aladin</id>
+      <name>CHAHI Rabie Ala-Eddine</name>
+      <email>rabie_chahi@yahoo.fr</email>
+    </developer>
+  </developers>
+  
+  <!--POPRETIES : JAVA 8 & UTF-8-->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
 
   <dependencies>
+    
+    <!--JUNIT DEPENDENCY-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
-    </dependency>
+	</dependency>
+	
   </dependencies>
 </project>
