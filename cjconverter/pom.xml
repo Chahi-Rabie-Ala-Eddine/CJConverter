@@ -19,22 +19,199 @@
     </developer>
   </developers>
   
-  <!--POPRETIES : JAVA 8 & UTF-8-->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+    <project.resources.sourceEncoding>${project.build.sourceEncoding}</project.resources.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
-    
-    <!--JUNIT DEPENDENCY-->
+ 	
+ 	<!-- COMMONS dependency -->
+ 	<dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.0</version>
+	</dependency>
+ 
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>org.apache.commons</groupId>
+	  <artifactId>commons-text</artifactId>
+	  <version>1.4</version>
+	</dependency>
+	
+ 	<!-- JUNIT dependency -->    
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
+    </dependency>
+    
+    <!-- JSON dependency -->
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
 	</dependency>
 	
+	<dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.1</version>
+	</dependency>
+
+	<!-- CSV dependency -->
+	<dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-csv</artifactId>
+      <version>2.9.8</version>
+	</dependency>
+ 
+	<dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+      <version>1.1</version>
+	</dependency>
+
   </dependencies>
+  
+  
+  <!-- PLUGINS for Build -->
+  <build>
+    
+    <plugins>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+      </plugin>
+             
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>1.4.2.RELEASE</version> <!-- using latest from maven central, feel free to use any specific -->
+      </plugin>
+        
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.4</version> <!-- using latest from maven central, feel free to use any specific -->
+      </plugin>
+
+	  <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+	 <plugin>
+       <artifactId>maven-assembly-plugin</artifactId>
+       <configuration>
+         <archive>
+           <manifest>
+             <mainClass>test.tst.test.Main</mainClass>
+           </manifest>
+         </archive>
+         <finalName>CJConverter</finalName>
+         <descriptorRefs>
+           <descriptorRef>jar-with-dependencies</descriptorRef>
+         </descriptorRefs>
+       </configuration>
+       <executions>
+         <execution>
+           <id>make-assembly</id>
+           <phase>package</phase>
+           <goals>
+             <goal>single</goal>
+           </goals>
+         </execution>
+       </executions>
+     </plugin>
+     
+     <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+ 		  <javaApiLinks>
+            <property>
+              <name>foo</name>
+              <value>bar</value>
+            </property>
+          </javaApiLinks>                    
+         <javadocExecutable>/usr/lib/jvm/java-11-openjdk-amd64/bin/javadoc</javadocExecutable>
+       </configuration>
+     </plugin>
+   
+    <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-archetype-plugin</artifactId>
+       <version>2.2</version>
+       <configuration>
+         <defaultEncoding>${project.build.sourceEncoding}</defaultEncoding>
+         <encoding>${project.build.sourceEncoding}</encoding>
+         <archetypeArtifactId>archetype-wsjpa</archetypeArtifactId>
+         <archetypeGroupId>br.com.example</archetypeGroupId>
+         <archetypeVersion>1.0</archetypeVersion>
+         <archetypeFilteredExtentions>java,xml</archetypeFilteredExtentions>
+      </configuration>
+    </plugin>
+  
+   </plugins>
+  
+  </build>
+  
+  <!-- PLUGINS for Report -->
+  <reporting>
+      
+    <plugins>
+        
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.0</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+         
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>3.0.4</version>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/site</xmlOutputDirectory>
+        </configuration>
+      </plugin>
+        
+      </plugins>
+    
+    </reporting>
+  
+  
 </project>
