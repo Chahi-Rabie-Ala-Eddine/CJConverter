@@ -150,7 +150,7 @@ The application is based on syntax trees for the three types of files. Indeed is
 
 
 The implementation is also based on cryptographical algorithms as MD5 to hash files. The use of scripts is also engaged.
-The output files are distributed either in Json Outputs or in CSV outputs depending on the type of file desired. Two files also exist under the names of `CSV` Files and `Json` Files containing some good files to test.
+The output files are distributed either in Json Outputs or in CSV outputs depending on the type of file desired. Two folders also exist under the names of `CSV` Files and `Json` Files containing some good files to test.
 
 ## Upgrading
 
